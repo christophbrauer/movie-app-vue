@@ -1,26 +1,81 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <Spinner v-if="loading" />
+    <header>
+      <router-link to="/">
+        <h1><span>Vue</span>vie and TV Database</h1>
+      </router-link>
+    </header>
+    <main>
+      <router-view/>
+    </main>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Spinner from '@/components/Spinner';
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
+    Spinner
+  },
+  data() {
+    return {
+      loading: true
+    }
+  },
+  mounted () {
+    setTimeout(() => {
+      this.loading = false; 
+    }, 2000);
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+    &::selection {
+      background: transparentize($color: #FFDF6C, $amount: 0.5);
+    }
+  }
+  
+  html {
+    font-size: 18px;
+  }
+  
+  body {
+    font-family: "Lato", sans-serif;
+    font-size: 1rem;
+    background-color: #707070;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  header, main, footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  header {
+    background-color: #3F3F3F;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    
+    span {
+      color: #FFDF6C;
+    }
+    
+    h1 {
+      color: #FFFFFF;
+    }
+  }
 </style>
